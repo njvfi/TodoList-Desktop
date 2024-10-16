@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoList_Maui.MainPage">
+
+    <Grid
+      RowDefinitions="100,*,70"
+      ColumnDefinitions="*,70">
+
+        <VerticalStackLayout Grid.ColumnSpan="2"
+                             VerticalOptions="Center"
+                             Padding="25">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0"
+                       x:Name="AddEntry"
+                       FontSize="20"
+                       Placeholder="Enter your goal"/>
+                <Button Grid.Column="1"
+                        FontSize="20"
+                        Text="Add Goal"
+                        Clicked ="OnAddGoal"/>
+            </Grid>
+        </VerticalStackLayout>
+        <ScrollView Grid.ColumnSpan="2"
+                        Grid.RowSpan="2"
+                        Grid.Row="1">
+            <VerticalStackLayout Padding = "40,20,40,10"
+                     Spacing = "25">
+                <Label Text = "ToDo List"
+                       FontSize ="32"
+                       HorizontalOptions="Center"/>
+                <CollectionView x:Name="GoalsList">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="20">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="35"/>
+                                    <RowDefinition Height="25"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0"
+                           Grid.Row="0"
+                           FontSize="16"
+                           VerticalTextAlignment="Center"
+                           Text="{Binding Name}"/>
+                                <Label Grid.Column="0"
+                           Grid.Row="1"
+                           FontSize="14"
+                           Text="{Binding Category}"/>
+                                <Label Grid.Column="1"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           FontSize="16"
+                           VerticalTextAlignment="Center"
+                           Text="{Binding Description}"/>
+                                <Button Grid.Column="2"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Text="{Binding ButtonText}"
+                            BackgroundColor="{Binding ButtonColor}"/>
+                                <Button Grid.Column="2"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            BackgroundColor="Transparent"
+                            Clicked="OnSwitchGoalStatus"
+                            BindingContext="{Binding Id}"/>
+                                <Button Grid.Column="3"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Text="Delete Goal"
+                            BindingContext="{Binding Id}"
+                            Clicked="OnDeleteGoal"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        <FlexLayout
+        Grid.Row="2"
+        Grid.Column="1"
+        AlignItems="Start"
+        JustifyContent="Start"
+        Wrap="NoWrap">
+            <Button
+            AbsoluteLayout.LayoutBounds="1,1,60,60"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            CornerRadius="50"
+            HeightRequest="60"
+            WidthRequest="60"
+            Clicked="OnToAddGoal"
+            ImageSource="plus.png"/>
+        </FlexLayout>
+
+    </Grid>
+
+</ContentPage>
