@@ -22,11 +22,11 @@ public partial class Add : ContentPage
 			goal.Status = false;
 			switch(CategoryPicker.SelectedIndex)
 			{
-				case 1:goal.Category = Category.Work; break;
-				case 2:goal.Category = Category.Study; break;
-				case 3:goal.Category = Category.Sport; break;
-				case 4:goal.Category = Category.House; break;
-				case 5:goal.Category = Category.Other; break;
+				case 0:goal.Category = Category.Work; break;
+				case 1:goal.Category = Category.Study; break;
+				case 2:goal.Category = Category.Sport; break;
+				case 3:goal.Category = Category.House; break;
+				case 4:goal.Category = Category.Other; break;
 				default: goal.Category = Category.Other; break;
 			}
 			App.GoalRepository.AddGoal(goal);

@@ -72,13 +72,10 @@ namespace TodoList_Maui
             UpdateData();
         }
 
-        public void OnToAddGoal(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new Add());
-        }
+
         public void OnAddGoal(object sender, EventArgs e)
         {
-            
+
             if (AddEntry.Text != null)
             {
                 Goals goal = new Goals { Name = AddEntry.Text, Category = Category.Other, Status = false };
@@ -90,6 +87,17 @@ namespace TodoList_Maui
             }
             else return;
         }
-    }
+        #region Navigation
+        public void OnToAddGoal(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Add());
+        }
 
+        public void OnToEdit(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            Navigation.PushAsync(new Edit((int)button.BindingContext));
+        }
+		#endregion
+	}
 }
