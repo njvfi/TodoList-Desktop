@@ -20,15 +20,15 @@ public partial class Add : ContentPage
 			goal.Name = NameEntry.Text;
 			goal.Description = DescriptionEntry.Text;
 			goal.Status = false;
-			switch(CategoryPicker.SelectedIndex)
+			goal.Category = CategoryPicker.SelectedIndex switch
 			{
-				case 0:goal.Category = Category.Work; break;
-				case 1:goal.Category = Category.Study; break;
-				case 2:goal.Category = Category.Sport; break;
-				case 3:goal.Category = Category.House; break;
-				case 4:goal.Category = Category.Other; break;
-				default: goal.Category = Category.Other; break;
-			}
+				0 => Category.Work,
+				1 => Category.Study,
+				2 => Category.Sport,
+				3 => Category.House,
+				4 => Category.Other,
+				_ => Category.Other,
+			};
 			App.GoalRepository.AddGoal(goal);
 			Navigation.PushAsync(new MainPage());
 		}

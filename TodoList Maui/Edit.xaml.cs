@@ -4,7 +4,7 @@ namespace TodoList_Maui;
 
 public partial class Edit : ContentPage
 {
-	Goals goal = new Goals();
+	private Goals goal = new Goals();
 	public Edit(int _id)
 	{
 		goal = App.GoalRepository.GetGoal(_id);
@@ -17,9 +17,15 @@ public partial class Edit : ContentPage
 	{
 		Name.Text = goal.Name;
 		Description.Text = goal.Description;
-		Status.IsToggled = goal.Status;
+		StatusSwitch.IsToggled = goal.Status;//TODO change text on switch
+		Status.Text = goal.Status ? "Done" : "Not ready";
 		CategoryPicker.ItemsSource = Enum.GetValues(typeof(Category)).Cast<Category>().ToList();
 		CategoryPicker.SelectedIndex = Convert.ToInt32(goal.Category);
+	}
+
+	private void OnStatus(object sender, EventArgs e)
+	{
+		Status.Text = StatusSwitch.IsToggled ? "Done" : "Not ready";
 	}
 
 	private void OnSubmit(object sender, EventArgs e)
@@ -28,16 +34,16 @@ public partial class Edit : ContentPage
 		{
 			goal.Name = Name.Text;
 			goal.Description = Description.Text;
-			goal.Status = Status.IsToggled;
-			switch (CategoryPicker.SelectedIndex)
+			goal.Status = StatusSwitch.IsToggled;
+			goal.Category = CategoryPicker.SelectedIndex switch
 			{
-				case 0: goal.Category = Category.Work; break;
-				case 1: goal.Category = Category.Study; break;
-				case 2: goal.Category = Category.Sport; break;
-				case 3: goal.Category = Category.House; break;
-				case 4: goal.Category = Category.Other; break;
-				default: goal.Category = Category.Other; break;
-			}
+				0 => Category.Work,
+				1 => Category.Study,
+				2 => Category.Sport,
+				3 => Category.House,
+				4 => Category.Other,
+				_ => Category.Other,
+			};
 			App.GoalRepository.EditGoal(goal);
 			Update();
 		}

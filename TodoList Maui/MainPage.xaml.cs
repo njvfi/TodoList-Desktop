@@ -48,7 +48,6 @@ namespace TodoList_Maui
                         ButtonColor = "Red"
                     };
                     finalGoals.Add(newGoal);
-                    var debug = 0;
                 }
             }
             GoalsList.ItemsSource = finalGoals;
@@ -65,9 +64,8 @@ namespace TodoList_Maui
 
         public void OnSwitchGoalStatus(object sender, EventArgs e)
         {
-            Button button = (Button)sender;
-
-            App.GoalRepository.SwitchGoalStatus((int)button.BindingContext);
+			Button button = (Button)sender;
+			App.GoalRepository.SwitchGoalStatus((int)button.BindingContext);
 
             UpdateData();
         }

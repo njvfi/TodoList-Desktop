@@ -3,21 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TodoList_Maui.Edit"
              Title="Edit">
-    <VerticalStackLayout>
+    <Grid ColumnDefinitions="30*,50,10*"
+          RowDefinitions="50,50,200,50,50,50"
+          Padding="25"
+          RowSpacing="10">
         <Button Clicked="OnToMainPage"
                 Text="Main Page"
-                HorizontalOptions="Fill"/>
+                HorizontalOptions="Fill"
+                Grid.ColumnSpan="3"
+                Grid.Row="0"/>
         <Entry x:Name="Name"
-               FontSize="24"/>
+               FontSize="24"
+               Grid.ColumnSpan="3"
+               Grid.Row="1"/>
         <Entry x:Name="Description"
                FontSize="24"
-               HeightRequest="200"/>
-        <Switch x:Name="Status" 
-                IsToggled="false"/>
+               HeightRequest="200"
+               Grid.ColumnSpan="3"
+               Grid.Row="2"/>
+        <Label Text="Status"
+               FontSize="24"
+               VerticalOptions="Center"
+               Grid.Column="0"
+               Grid.Row="3"/>
+        <Switch x:Name="StatusSwitch" 
+                Grid.Column="1"
+                Grid.Row="3"
+                Toggled="OnStatus"
+                OnColor="Green"/>
+        <Label x:Name="Status"
+               FontSize="24"
+               VerticalOptions="Center"
+               Grid.Column="2"
+               Grid.Row="3"/>
         <Picker x:Name="CategoryPicker"
-                FontSize="24"/>
+                FontSize="24"
+                Grid.ColumnSpan="3"
+                Grid.Row="4"/>
         <Button Clicked="OnSubmit"
                 Text="Submit"
-                HorizontalOptions="End"/>
-    </VerticalStackLayout>
+                Grid.Column="2"
+                HorizontalOptions="End"
+                Grid.Row="5"/>
+    </Grid>
 </ContentPage>
